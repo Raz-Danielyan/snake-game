@@ -17,9 +17,20 @@ let gameOver = false,
 let highScore = localStorage.getItem("high-score") || 0;
 highScoreElement.innerHTML = `High Score: ${highScore}`;
 
+function checkArrayInArray(arr, farr) {
+  if (JSON.stringify(arr).includes(JSON.stringify(farr))) return true;
+  return false;
+}
+
 const updateFoodPosition = () => {
-  foodX = Math.floor(Math.random() * 30) + 1;
-  foodY = Math.floor(Math.random() * 30) + 1;
+  let fulfilled = false;
+  while (!fulfilled) {
+    foodX = Math.floor(Math.random() * 30) + 1;
+    foodY = Math.floor(Math.random() * 30) + 1;
+    if (!checkArrayInArray(snakeBody, [foodX, foodY])) {
+      fulfilled = true;
+    }
+  }
 };
 
 const handleGameOver = () => {
