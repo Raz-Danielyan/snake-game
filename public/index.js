@@ -70,10 +70,27 @@ const initGame = () => {
     snakeBody[i] = snakeBody[i - 1];
   }
 
+  if (snakeX <= 0) {
+    snakeX = 30;
+  } else if (snakeX > 30) {
+    snakeX = velocityX;
+  } else if (snakeY <= 0) {
+    snakeY = 30;
+  } else if (snakeY > 30) {
+    snakeY = velocityY;
+  }
+
   snakeBody[0] = [snakeX, snakeY];
 
-  if (snakeX <= 0 || snakeX > 30 || snakeY <= 0 || snakeY > 30) {
-    return (gameOver = true);
+  for (let index = 0; index < snakeBody.length; index++) {
+    if (
+      snakeBody[0] >= 30 ||
+      snakeBody[0] <= 0 ||
+      snakeBody[1] >= 30 ||
+      snakeBody[1] <= 0
+    ) {
+      console.log(snakeBody);
+    }
   }
 
   for (let i = 0; i < snakeBody.length; i++) {
